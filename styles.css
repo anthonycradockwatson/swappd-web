@@ -510,3 +510,6 @@ p { margin: 0; }
 /* Android waitlist: no card, a divider separates it from the download hero */
 .waitlist__card { background: none; box-shadow: none; border-radius: 0; padding: 72px 0 0; border-top: 1px solid var(--line); }
 @media (max-width: 560px) { .waitlist__card { padding: 56px 0 0; } }
+
+/* a little more room between each checklist and its "Ideal for" line */
+.tier__ideal { margin-top: 16px; }
