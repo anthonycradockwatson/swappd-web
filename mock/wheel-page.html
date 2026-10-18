@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Series 6 — Forge Wheels (sample page)</title>
+  <!-- Sample manufacturer product page used to illustrate the Swappd Try On integration. Fictional brand, no real products. -->
+  <style>
+    :root { --ink: #111317; --muted: #6b7078; --line: #e4e6ea; --soft: #f3f4f6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: #fff; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    .top { background: var(--ink); color: #fff; text-align: center; font-size: 12px; letter-spacing: .06em; padding: 9px; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 22px 48px; border-bottom: 1px solid var(--line); }
+    .logo { font-weight: 800; letter-spacing: .28em; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+    .logo i { width: 22px; height: 22px; border-radius: 50%; border: 4px solid var(--ink); position: relative; }
+    .logo i::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--ink); }
+    nav { display: flex; gap: 34px; font-size: 14px; }
+    nav a { color: #3b3f46; }
+    .icons { display: flex; gap: 20px; font-size: 14px; }
+
+    .crumbs { padding: 22px 48px 0; font-size: 12.5px; color: var(--muted); }
+    .crumbs b { color: var(--ink); font-weight: 500; }
+
+    .product { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; padding: 24px 48px 56px; max-width: 1280px; margin: 0 auto; }
+    .stage { background: radial-gradient(circle at 50% 45%, #fff 0%, #eceef1 70%); border-radius: 20px; aspect-ratio: 1 / 1; display: grid; place-items: center; position: relative; }
+    .stage img { width: 82%; height: auto; filter: drop-shadow(0 30px 28px rgba(0,0,0,.25)); }
+    .tag { position: absolute; top: 20px; left: 20px; background: #fff; border: 1px solid var(--line); font-size: 12px; padding: 6px 12px; border-radius: 999px; }
+    .thumbs { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+    .thumbs span { width: 8px; height: 8px; border-radius: 50%; background: #c9ccd2; }
+    .thumbs span:first-child { background: var(--ink); }
+
+    .info { padding-top: 12px; }
+    .eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    h1 { margin: 10px 0 8px; font-size: 44px; letter-spacing: -.02em; line-height: 1.05; }
+    .price { font-size: 22px; font-weight: 600; }
+    .price small { font-size: 13px; font-weight: 400; color: var(--muted); }
+    .desc { margin: 18px 0 0; color: #4a4f57; line-height: 1.6; font-size: 15px; max-width: 34em; }
+    .label { margin: 30px 0 12px; font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; }
+    .label span { font-weight: 400; color: var(--muted); }
+
+    .swatches { display: flex; gap: 12px; }
+    .swatch { width: 38px; height: 38px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px var(--line); cursor: pointer; padding: 0; }
+    .swatch[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); }
+    .sizes { display: flex; gap: 10px; flex-wrap: wrap; }
+    .size { padding: 12px 15px; border: 1px solid var(--line); border-radius: 10px; font-size: 14px; background: #fff; cursor: pointer; font-family: inherit; }
+    .size[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+
+    .actions { display: grid; gap: 12px; margin-top: 34px; max-width: 460px; }
+    .btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 17px 24px; border-radius: 12px; font-size: 15px; font-weight: 600; border: 1.5px solid var(--ink); cursor: pointer; font-family: inherit; }
+    .btn--primary { background: var(--ink); color: #fff; }
+    .btn--secondary { background: #fff; color: var(--ink); }
+    .btn--ar {
+      position: relative; flex-direction: column; gap: 4px; padding: 22px 24px; border: 0; border-radius: 14px; color: #fff;
+      background: linear-gradient(135deg, #14283A 0%, #0D1B2A 55%, #2E424F 100%);
+      box-shadow: 0 0 0 1px rgba(189,197,240,.45), 0 14px 34px -10px rgba(13,27,42,.65), inset 0 1px 0 rgba(255,255,255,.12);
+    }
+    .btn--ar .row { display: flex; align-items: center; gap: 12px; font-size: 17px; letter-spacing: -.01em; }
+    .btn--ar .row svg { width: 28px; height: 28px; color: #BDC5F0; }
+    .btn--ar .ar-by { display: flex; align-items: center; gap: 7px; margin-left: 4px; padding-left: 14px; border-left: 1px solid rgba(189,197,240,.4); font-size: 13px; font-weight: 500; color: #A6B8C1; letter-spacing: 0; }
+    .btn--ar .ar-logo { height: 15px; width: auto; }
+    .btn--ar .sub { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 500; color: #A6B8C1; }
+    .btn--ar .sub img { height: 11px; width: auto; }
+    .powered { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--muted); }
+    .powered img { height: 14px; width: auto; }
+    .arnote { font-size: 13.5px; color: #4a4f57; margin: -2px 0 0; text-align: center; }
+    .artag { position: absolute; top: 20px; right: 20px; display: flex; align-items: center; gap: 8px; background: #0D1B2A; color: #fff; font-size: 12px; font-weight: 600; padding: 7px 13px 7px 11px; border-radius: 999px; box-shadow: 0 8px 20px -8px rgba(13,27,42,.6); }
+    .artag svg { width: 15px; height: 15px; color: #BDC5F0; }
+
+    .specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 34px; border-top: 1px solid var(--line); max-width: 460px; grid-template-columns: repeat(2, 1fr); }
+    .specs div { padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+    .specs div span { display: block; color: var(--muted); margin-bottom: 4px; }
+    .specs div b { font-weight: 600; font-size: 15px; }
+
+    @media (max-width: 900px) {
+      header, .crumbs, .product { padding-left: 20px; padding-right: 20px; }
+      nav { display: none; }
+      .product { grid-template-columns: 1fr; gap: 28px; }
+      h1 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top">FREE SHIPPING ON ALL SETS · 30-DAY FITMENT GUARANTEE</div>
+  <header>
+    <a href="#" class="logo"><i></i>FORGE</a>
+    <nav><a href="#">Wheels</a><a href="#">Fitment guide</a><a href="#">Dealers</a><a href="#">Support</a></nav>
+    <div class="icons"><a href="#">Search</a><a href="#">Account</a><a href="#">Cart (0)</a></div>
+  </header>
+
+  <div class="crumbs">Wheels / Flow-formed / <b>Series 6</b></div>
+
+  <main class="product">
+    <div class="stage">
+      <span class="tag">Flow-formed · 1-piece</span>
+      <span class="artag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M12 7.5l4 2.2v4.6l-4 2.2-4-2.2V9.7z"/><path d="M8 9.7l4 2.3 4-2.3M12 12v4.5"/></svg>AR ready</span>
+      <img id="wheel" src="wheel-bronze.png" alt="Series 6 wheel in bronze">
+      <div class="thumbs"><span></span><span></span><span></span><span></span></div>
+    </div>
+
+    <div class="info">
+      <p class="eyebrow">Series</p>
+      <h1>Series 6</h1>
+      <p class="price">$640 <small>each · set of 4 available</small></p>
+      <p class="desc">A lightweight flow-formed multi-spoke built for street and track. Fine, intricate spokes and a deep concave face in your choice of finish.</p>
+
+      <p class="label">Finish <span id="finishName">Bronze</span></p>
+      <div class="swatches" id="swatches">
+        <button class="swatch" data-name="Bronze" data-img="wheel-bronze.png" style="background:#9a6c3f" aria-pressed="true" aria-label="Bronze"></button>
+        <button class="swatch" data-name="Gunmetal" data-img="wheel-gunmetal.png" style="background:#4b4f55" aria-pressed="false" aria-label="Gunmetal"></button>
+        <button class="swatch" data-name="Silver" data-img="wheel-silver.png" style="background:#c3c7cd" aria-pressed="false" aria-label="Silver"></button>
+      </div>
+
+      <p class="label">Size <span>Size guide</span></p>
+      <div class="sizes">
+        <button class="size" aria-pressed="false">18 × 8.5</button>
+        <button class="size" aria-pressed="true">19 × 9.5</button>
+        <button class="size" aria-pressed="false">19 × 10.5</button>
+        <button class="size" aria-pressed="false">20 × 10</button>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn--ar">
+          <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><text x="12" y="15.2" text-anchor="middle" font-size="8.6" font-weight="800" font-family="-apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif" fill="currentColor" stroke="none" letter-spacing="-.2">AR</text></svg>Try on your car<span class="ar-by">powered by <img class="ar-logo" src="swappd-logo-light.png" alt="Swappd"></span></span>
+        </button>
+        <button class="btn btn--secondary">Add to cart</button>
+      </div>
+
+      <div class="specs">
+        <div><span>Weight</span><b>9.4 kg</b></div>
+        <div><span>Load rating</span><b>750 kg</b></div>
+        <div><span>Bolt pattern</span><b>5×112</b></div>
+        <div><span>Offset</span><b>ET 35</b></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Swatches swap the wheel finish; size buttons toggle selection.
+    document.querySelectorAll('.swatch').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.swatch').forEach(x => x.setAttribute('aria-pressed', 'false'));
+      b.setAttribute('aria-pressed', 'true');
+      document.getElementById('finishName').textContent = b.dataset.name;
+      const img = document.getElementById('wheel');
+      img.src = b.dataset.img;
+      img.alt = 'Series 6 wheel in ' + b.dataset.name.toLowerCase();
+    }));
+    document.querySelectorAll('.size').forEach(b => b.addEventListener('click', () => {
+      document.querySelectorAll('.size').forEach(x => x.setAttribute('aria-pressed', 'false'));
+      b.setAttribute('aria-pressed', 'true');
+    }));
+  </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Swappd</title>
+  <meta name="description" content="Get in touch with Swappd: feature requests, bug reports, feedback, parts requests and partnership enquiries.">
+  <meta name="theme-color" content="#0D1B2A">
+  <link rel="icon" href="../../assets/logo-white.png">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+
+  <header class="nav">
+    <a href="../../index.html" class="nav__brand" aria-label="Swappd home">
+      <img src="../../assets/logo-white.png" alt="Swappd">
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="../../index.html">Home</a>
+      <a href="../../partnerships.html">Partnerships</a>
+      <a href="../../legal/privacy_policy/">Legal</a>
+      <a href="../../legal/contact-us/" aria-current="page">Contact</a>
+      <a href="../../download.html" class="btn btn--small">Download</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="contact">
+      <div class="contact__head reveal">
+        <p class="eyebrow">Contact</p>
+        <h1>Swappd Support</h1>
+        <p class="lede">Get in touch, we read every message.</p>
+      </div>
+
+      <div class="contact__card reveal">
+        <form id="support-form">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+          </div>
+          <div class="field">
+            <label for="topic">How can we help?</label>
+            <select id="topic" name="topic" required>
+              <option value="" disabled selected>Select a topic</option>
+              <option value="Feature Request">Feature request</option>
+              <option value="Bug Report">Bug report</option>
+              <option value="Feedback">Feedback</option>
+              <option value="Parts Request">Parts request</option>
+              <option value="Partnership">Partnership enquiry</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="parts-request-fields" id="parts-request-fields" aria-live="polite">
+            <p class="parts-request-title">Parts request details</p>
+            <div class="field">
+              <label for="part-type">Part type</label>
+              <select id="part-type" name="partType">
+                <option value="" selected>Select a part type</option>
+                <option value="Wheels">Wheels</option>
+                <option value="Front lips">Front lips</option>
+                <option value="Rear Diffusers">Rear Diffusers</option>
+                <option value="Side Skirts">Side Skirts</option>
+              </select>
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="manufacturer">Manufacturer</label>
+                <input type="text" id="manufacturer" name="manufacturer" placeholder="e.g. Rays, Varis, Maxton">
+              </div>
+              <div class="field">
+                <label for="part-model">Model</label>
+                <input type="text" id="part-model" name="partModel" placeholder="Specific part model">
+              </div>
+            </div>
+            <div class="wheel-details" id="wheel-details">
+              <div class="field-grid">
+                <div class="field">
+                  <label for="wheel-colour">Wheel colour (optional)</label>
+                  <input type="text" id="wheel-colour" name="wheelColour" placeholder="e.g. Matte bronze">
+                </div>
+                <div class="field">
+                  <label for="wheel-size">Wheel size (optional)</label>
+                  <input type="text" id="wheel-size" name="wheelSize" placeholder="e.g. 18in, 19in">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field" id="message-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us what’s going on…" required></textarea>
+          </div>
+          <button type="submit" id="support-submit" class="btn">Send via email</button>
+        </form>
+
+        <p class="contact__backup">Prefer email directly? Reach us at <a href="mailto:alex@swappd.app">alex@swappd.app</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="../../assets/logo-white.png" alt="Swappd">
+    <nav class="footer__links" aria-label="Legal">
+      <a href="../privacy_policy/">Privacy Policy</a>
+      <a href="../tos/">Terms of Service</a>
+      <a href="./">Contact</a>
+    </nav>
+    <p>&copy; 2026 Swappd. All rights reserved.</p>
+  </footer>
+
+  <script src="../../main.js"></script>
+  <script src="../../contact.js"></script>
+</body>
+</html>
