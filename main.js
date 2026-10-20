@@ -1,3 +1,25 @@
+// trying out tracking
+const MIXPANEL_TOKEN = 'd540da55c4255232e1d58d6fe3ee3ad4';
+
+const mixpanelScript = document.createElement('script');
+mixpanelScript.src = 'https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js';
+mixpanelScript.onload = () => {
+  window.mixpanel.init(MIXPANEL_TOKEN, {
+    track_pageview: false,
+    autocapture: false,
+  });
+
+  window.mixpanel.track('Page Viewed', {
+    page_path: window.location.pathname,
+    page_title: document.title,
+  });
+};
+mixpanelScript.onerror = () => {
+  console.error('Failed to load Mixpanel.');
+};
+document.head.appendChild(mixpanelScript);
+
+
 // Scroll reveal
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
