@@ -397,6 +397,11 @@ p { margin: 0; }
 @media (max-width: 760px) {
   .tier { padding: 36px 0; }
   .tier--media, .tier--media.tier--flip { grid-template-columns: 1fr; }
+  .tier--media .tier__body { display: contents; }
+  .tier--media .tier__main { order: 0; }
+  .tier--media .tier__media { order: 1; padding-top: 24px; border-top: 1px solid var(--line); }
+  .tier--media .tier__list { order: 2; padding: 0; border: 0; }
+  .tier--media .tier__ideal { order: 3; }
 }
 
 /* Dividers between tiers */
