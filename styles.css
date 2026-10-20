@@ -77,11 +77,14 @@ p { margin: 0; }
   border-bottom: 1px solid var(--line);
 }
 .nav__brand img { height: 26px; width: auto; }
-.nav__links { display: flex; align-items: center; gap: 28px; font-size: 0.9rem; color: var(--text-dim); }
+.nav__links { display: flex; align-items: center; gap: 28px; min-width: 0; font-size: 0.9rem; color: var(--text-dim); }
+.nav__links > a, .nav__links > details { flex: 0 0 auto; }
 .nav__links a:not(.btn):hover { color: var(--text); }
 .nav__links .btn { color: var(--bg); }
 .nav__links a[aria-current="page"]:not(.btn) { color: var(--text); }
 .nav__dropdown { display: none; position: relative; }
+.nav__links--compact > a:not(.btn) { display: none; }
+.nav__links--compact .nav__dropdown { display: block; }
 .nav__dropdown summary { list-style: none; cursor: pointer; color: var(--text); }
 .nav__dropdown summary::-webkit-details-marker { display: none; }
 .nav__dropdown summary::after { content: "⌄"; margin-left: 6px; }
@@ -436,14 +439,6 @@ p { margin: 0; }
 .waitlist__consent { margin-top: 16px; font-size: 0.85rem; color: var(--text-dim); }
 .waitlist__consent a { text-decoration: underline; text-underline-offset: 3px; }
 .waitlist__consent a:hover { color: var(--text); }
-
-/* Narrow phones: keep Download visible and put the other destinations in Links. */
-@media (max-width: 560px) {
-  .nav { padding-left: 16px; padding-right: 16px; }
-  .nav__links { gap: 12px; font-size: 0.85rem; }
-  .nav__links > a:not(.btn) { display: none; }
-  .nav__dropdown { display: block; }
-}
 
 /* Imported policy text */
 .legal__body p, .legal__body ul, .legal__body ol { margin-top: 16px; }

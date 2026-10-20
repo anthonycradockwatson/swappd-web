@@ -19,6 +19,29 @@ mixpanelScript.onerror = () => {
 };
 document.head.appendChild(mixpanelScript);
 
+// Use the compact navigation only when the full header links no longer fit.
+const navLinks = document.querySelector('.nav__links');
+if (navLinks) {
+  const header = navLinks.closest('.nav');
+  const brand = header?.querySelector('.nav__brand');
+  if (header && brand && navLinks.querySelector('.nav__dropdown')) {
+    const updateNavigation = () => {
+      navLinks.classList.remove('nav__links--compact');
+      const headerStyle = getComputedStyle(header);
+      const availableWidth =
+        header.clientWidth -
+        parseFloat(headerStyle.paddingLeft) -
+        parseFloat(headerStyle.paddingRight) -
+        brand.getBoundingClientRect().width;
+      navLinks.classList.toggle('nav__links--compact', navLinks.scrollWidth > availableWidth);
+    };
+
+    new ResizeObserver(updateNavigation).observe(header);
+    window.addEventListener('resize', updateNavigation);
+    document.fonts.ready.then(updateNavigation);
+    updateNavigation();
+  }
+}
 
 // Scroll reveal
 const io = new IntersectionObserver((entries) => {
