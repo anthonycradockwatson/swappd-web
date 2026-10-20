@@ -1,6 +1,6 @@
 // Contact form: builds a pre-filled email to the support address (no backend needed).
 (() => {
-  const SUPPORT_EMAIL = 'alex@swappd.app';
+  const PARTNERSHIP_EMAIL = 'partnerships@swappd.app';
   const form = document.getElementById('support-form');
   if (!form) return;
 
@@ -96,7 +96,7 @@
         : `Message:\r\n${message}`);
 
     window.location.href =
-      `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      `mailto:${PARTNERSHIP_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     form.reset();
     updatePartsRequestVisibility();
